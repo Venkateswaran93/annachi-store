@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block title %}Owner Panel{% endblock %}
+{% block content %}
+<section class="page-head">
+  <div class="wrap"><h1>Owner Panel</h1>
+    <a class="btn btn-ghost" href="{{ url_for('admin_logout') }}">Logout</a></div>
+</section>
+<section class="section">
+  <div class="wrap">
+    <h2 class="title left">Add a product</h2>
+    <form class="form row-form" method="post" action="{{ url_for('admin_add') }}">
+      <input name="name" placeholder="Name (English)" required>
+      <input name="tamil_name" placeholder="Tamil name">
+      <select name="category" required>
+        {% for c in categories %}<option>{{ c }}</option>{% endfor %}
+      </select>
+      <input name="price" type="number" step="0.01" min="0" placeholder="Price ₹" required>
+      <input name="unit" placeholder="Unit (per kg, 500 ml…)">
+      <input name="emoji" placeholder="Emoji" maxlength="4">
+      <label class="check"><input type="checkbox" name="featured"> Featured</label>
+      <button class="btn" type="submit">Add</button>
+    </form>
+
+    <h2 class="title left">Products ({{ items|length }})</h2>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Product</th><th>Category</th><th>Price</th><th>Stock</th><th>Featured</th><th></th></tr>
+        {% for p in items %}
+        <tr>
+          <td>{{ p.emoji }} {{ p.name }}</td>
+          <td>{{ p.category }}</td>
+          <td>₹{{ '%g' % p.price }} / {{ p.unit }}</td>
+          <td><form method="post" action="{{ url_for('admin_toggle', pid=p.id, field='in_stock') }}">
+            <button class="mini {{ 'on' if p.in_stock }}">{{ 'In stock' if p.in_stock else 'Out' }}</button></form></td>
+          <td><form method="post" action="{{ url_for('admin_toggle', pid=p.id, field='featured') }}">
+            <button class="mini {{ 'on' if p.featured }}">{{ '★ Yes' if p.featured else 'No' }}</button></form></td>
+          <td><form method="post" action="{{ url_for('admin_delete', pid=p.id) }}">
+            <button class="mini danger">Delete</button></form></td>
+        </tr>
+        {% endfor %}
+      </table>
+    </div>
+
+    <h2 class="title left">Customer messages</h2>
+    {% for m in msgs %}
+      <div class="msg"><strong>{{ m.name }}</strong> · {{ m.phone }} · <small>{{ m.created_at }}</small>
+        <p>{{ m.message }}</p></div>
+    {% else %}
+      <p class="muted">No messages yet.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

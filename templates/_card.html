@@ -1,0 +1,10 @@
+<article class="card {% if not p.in_stock %}soldout{% endif %}">
+  <div class="card-emoji">{{ p.emoji }}</div>
+  <h3>{{ p.name }}</h3>
+  {% if p.tamil_name %}<p class="tamil">{{ p.tamil_name }}</p>{% endif %}
+  <p class="muted">{{ p.category }}</p>
+  <div class="card-foot">
+    <span class="price">₹{{ '%g' % p.price }} <small>{{ p.unit }}</small></span>
+    {% if p.in_stock %}<span class="tag ok">In stock</span>{% else %}<span class="tag out">Out of stock</span>{% endif %}
+  </div>
+</article>

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}Our Story - {{ store.name }}{% endblock %}
+{% block content %}
+<section class="page-head"><div class="wrap"><h1>Our Story <small>எங்கள் கதை</small></h1></div></section>
+<section class="section">
+  <div class="wrap two-col">
+    <div>
+      <h2 class="title left">A kadai built on trust</h2>
+      <p>{{ store.name }} began in {{ store.year_started }} as a small family shop with one promise:
+        <strong>good goods, honest weight, fair price.</strong> Over the years, neighbours became
+        regular customers, and regular customers became family.</p>
+      <p>Today we still greet you by name, pack your maligai the way you like it, and
+        remember what your home needs every month. Now you can also see what we stock
+        and reach us from your phone.</p>
+    </div>
+    <div class="values">
+      <div class="value"><span>🌾</span><h3>Quality first</h3><p>Rice, dals and spices chosen by hand, stocked fresh.</p></div>
+      <div class="value"><span>⚖️</span><h3>Honest weight</h3><p>Every kilo is a full kilo. No tricks, ever.</p></div>
+      <div class="value"><span>🤝</span><h3>Like family</h3><p>Friendly service, home delivery and credit for regulars.</p></div>
+    </div>
+  </div>
+</section>
+{% endblock %}

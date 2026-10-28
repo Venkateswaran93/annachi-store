@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">நம்ம கடை · Namma Kadai</p>
+      <h1>Your neighbourhood <span>Annachi</span> kadai, now online.</h1>
+      <p class="lead">Fresh rice, dals, masalas, oils and everyday essentials at honest prices —
+        just like the shop you have trusted for years.</p>
+      <div class="btn-row">
+        <a class="btn" href="{{ url_for('products') }}">Browse Products</a>
+        <a class="btn btn-ghost" href="https://wa.me/{{ store.whatsapp }}">Send list on WhatsApp</a>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <div class="kolam"></div>
+      <span class="hero-emoji">🛒</span>
+    </div>
+  </div>
+</section>
+
+<section class="strip">
+  <div class="wrap strip-row">
+    <span>🚚 Home delivery nearby*</span>
+    <span>🌿 Fresh stock every morning</span>
+    <span>💰 Fair, honest pricing</span>
+    <span>🤝 Credit for regular families*</span>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <h2 class="title">Shop by Category <small>வகைகள்</small></h2>
+    <div class="cat-grid">
+      {% for name, icon in categories.items() %}
+      <a class="cat-card" href="{{ url_for('products', category=name) }}">
+        <span class="cat-icon">{{ icon }}</span>
+        <span>{{ name }}</span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap">
+    <h2 class="title">Today's Favourites <small>இன்றைய தேர்வு</small></h2>
+    <div class="grid">
+      {% for p in featured %}
+        {% include "_card.html" %}
+      {% endfor %}
+    </div>
+    <p class="center"><a class="btn" href="{{ url_for('products') }}">See all products →</a></p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap offer">
+    <div>
+      <p class="eyebrow light">Weekly Offer</p>
+      <h2>Monthly Maligai Pack</h2>
+      <p>Rice, dal, oil, sugar and spices bundled for your family — ask at the counter
+        or WhatsApp us for this week's price.</p>
+    </div>
+    <a class="btn btn-yellow" href="{{ url_for('contact') }}">Enquire now</a>
+  </div>
+</section>
+{% endblock %}

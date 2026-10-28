@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Contact - {{ store.name }}{% endblock %}
+{% block content %}
+<section class="page-head"><div class="wrap"><h1>Contact Us <small>தொடர்புக்கு</small></h1></div></section>
+<section class="section">
+  <div class="wrap two-col">
+    <div class="info-card">
+      <h3>Visit the shop</h3>
+      <p>📍 {{ store.address }}</p>
+      <p>🕘 {{ store.hours }}</p>
+      <p>📞 {{ store.phone }}</p>
+      <p>✉️ {{ store.email }}</p>
+      <a class="btn btn-green" href="https://wa.me/{{ store.whatsapp }}">Chat on WhatsApp</a>
+    </div>
+    <form class="form" method="post">
+      <h3>Send us your enquiry or grocery list</h3>
+      <label>Your name<input name="name" required maxlength="80"></label>
+      <label>Phone number<input name="phone" required maxlength="20"></label>
+      <label>Message / list<textarea name="message" rows="5" required maxlength="1000"></textarea></label>
+      <button class="btn" type="submit">Send message</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

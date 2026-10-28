@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Products - {{ store.name }}{% endblock %}
+{% block content %}
+<section class="page-head">
+  <div class="wrap">
+    <h1>Our Products <small>பொருட்கள்</small></h1>
+    <form class="search" method="get" action="{{ url_for('products') }}">
+      <input type="text" name="q" value="{{ q }}" placeholder="Search rice, dal, ghee… / அரிசி, பருப்பு…">
+      {% if active %}<input type="hidden" name="category" value="{{ active }}">{% endif %}
+      <button class="btn" type="submit">Search</button>
+    </form>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="chips">
+      <a class="chip {% if not active %}on{% endif %}" href="{{ url_for('products', q=q) }}">All</a>
+      {% for name, icon in categories.items() %}
+        <a class="chip {% if active == name %}on{% endif %}"
+           href="{{ url_for('products', category=name, q=q) }}">{{ icon }} {{ name }}</a>
+      {% endfor %}
+    </div>
+
+    {% if items %}
+    <div class="grid">
+      {% for p in items %}{% include "_card.html" %}{% endfor %}
+    </div>
+    {% else %}
+      <p class="center muted">No products found. Try another word, or <a href="{{ url_for('contact') }}">ask us</a>.</p>
+    {% endif %}
+    <p class="note">Prices may change with the market. Please confirm at the shop or on call.</p>
+  </div>
+</section>
+{% endblock %}
