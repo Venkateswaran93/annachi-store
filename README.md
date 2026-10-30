@@ -22,3 +22,5 @@ From the panel you can add/delete products, mark stock/featured and read custome
 
 ## Going live
 Use a production server (e.g. gunicorn app:app) and set ADMIN_PASSWORD and SECRET_KEY.
+
+That's all
